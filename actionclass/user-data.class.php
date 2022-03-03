@@ -11,6 +11,9 @@ class userDataClass extends dbconnect{
 
     static private function insertData(){ // เพิ่มผู้ป่วย
 
+        if(count(self::CheckIDCrad($_POST['diagnose_idCrad'])) > 0) return "id crad number is bruised!";
+        if(count(self::CheckIDCode($_POST['diagnose_id_code'])) > 0) return "id code number bruised!";
+
         $sql = "INSERT INTO data_diagnose_user(diagnose_fullname, diagnose_id_code, diagnose_idCrad, diagnose_birthday, diagnose_age, diagnose_province, diagnose_district, diagnose_sub_district, diagnose_Date_first_admission, diagnose_right_reatment, diagnose_sub_right, diagnose_Filter1, diagnose_Craniofacial_filter, diagnose_Filtering_Craniofacial_Syndromic, diagnose_syndrome, diagnose_more, diagnose_latAndlong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $data = array($_POST['diagnose_fullname'], $_POST['diagnose_id_code'], $_POST['diagnose_idCrad'], $_POST['diagnose_birthday'], $_POST['diagnose_age'], $_POST['diagnose_province'], $_POST['diagnose_district'], $_POST['diagnose_sub_district'], $_POST['diagnose_Date_first_admission'], $_POST['diagnose_right_reatment'], $_POST['diagnose_sub_right'], $_POST['diagnose_Filter1'], $_POST['diagnose_Craniofacial_filter'], $_POST['diagnose_Filtering_Craniofacial_Syndromic'], $_POST['diagnose_syndrome'], $_POST['diagnose_more'], $_POST['diagnose_latAndlong']);
@@ -30,6 +33,18 @@ class userDataClass extends dbconnect{
         echo "<script>alert(`แก้ไขข้อมูลเรียบร้อย`);</script>";
         return true;
     }
+
+    static private function CheckIDCrad($idCrad){
+        $sql = "SELECT * FROM data_diagnose_user WHERE diagnose_idCrad = ?";
+        $data = array($idCrad);
+        return self::getExecute($sql, $data);
+    }
+
+    static private function CheckIDCode($idCode){
+        $sql = "SELECT * FROM data_diagnose_user WHERE diagnose_id_code = ?";
+        $data = array($idCode);
+        return self::getExecute($sql, $data);
+    }    
 
     static public function getDataUser($id){
         $sql = "SELECT * FROM data_diagnose_user WHERE diagnose_id = ?";

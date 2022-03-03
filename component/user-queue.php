@@ -70,7 +70,7 @@ if(isset($_GET['hid'])){
                 </div>
                 <div class="mb-3">
                     <label class="form-label">วัน-เดือน-ปี เกิด</label>
-                    <input type="text" disabled class="form-control form-control-sm" style="max-width: 25rem;" value="<?php echo $diagnose_birthday ?>">
+                    <input type="text" disabled class="form-control form-control-sm" style="max-width: 25rem;" value="<?php echo optionclass::DateThai($diagnose_birthday) ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">อายุ</label>
@@ -98,10 +98,22 @@ if(isset($_GET['hid'])){
         <div class="col-sm-6 col-12" style="background-color: #ffffff;" >
             <form id="sb" action="" method="POST" class="border p-3 shadow-sm">
                 <div class="mb-3">
-                    <label class="form-label"><strong>เลือก วันที่จองคิว / นัดส่งตัวรักษา</strong></label>
-                    <input type="datetime-local" name="appointment_date" 
+                    <label class="form-label"><strong>เลือก วันที่จองคิว / นัดส่งตัวรักษา</strong></label><br>
+
+                    <strong class="text-danger">
+                        วันส่งตัวรักษาต้องไม่เกิน 5 เดือน นับจากวันเกิด
+                    </strong> <br>
+                    <span class="text-danger">
+                        <?php echo optionclass::DateThai($diagnose_birthday) ?> ถึง <?php echo optionclass::MonthPlus($diagnose_birthday, 5) ?>
+                    </span>
+                    <br>
+                    
+                    <input type="datetime-local" onchange="myCheckData(`<?php echo $diagnose_birthday?>`, this.value)" name="appointment_date" 
                     class="form-control form-control-sm" style="max-width: 25rem;" 
-                    value="<?php echo str_replace('|','T',strval(date('Y-m-d|H:i:s')))?>">
+                    value="">
+                    <?php //echo str_replace('|','T',strval(date('Y-m-d|H:i:s')))?>
+
+
                 </div>
                 <div class="input-group mb-3">
                     <input type="hidden" name="hospita_code" value="<?php echo $codeHid?>">
@@ -118,6 +130,21 @@ if(isset($_GET['hid'])){
 </section>
 
 <script>
+    function myCheckData(birthday, myThis){
+        let form = new FormData();
+        form.append('birthday', birthday);
+        form.append('myThis', myThis);
+        axios({
+            method: 'post',
+            url: 'api/checkDate.api.php',
+            data: form
+        }).then((data)=>{
+            if(data.data !== true){
+                alert(data.data);
+                document.querySelector('[name=appointment_date]').value = "";
+            }
+        });
+    }
     function mySaveData(){
         document.getElementById('sb').submit()
     }

@@ -19,6 +19,12 @@ class optionclass extends dbconnect
         return "$strDay $strMonthThai $strYear";
     }   
 
+    static public function MonthPlus($date, $plus){
+        $time = strtotime($date);
+        $final = date("Y-m-d", strtotime("+$plus month", $time));
+        return self::DateThai($final);
+    }    
+
     static public function randCode($table, $fill)
     {
         $rand = rand(1, 999999);
@@ -117,5 +123,7 @@ class optionclass extends dbconnect
             return "-";
         }
     }
+
+
 
 }

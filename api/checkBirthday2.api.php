@@ -1,20 +1,22 @@
 <?php
 
-
 class checkBirthdayApi {
     static public function checkBirthday($birthday){
         $birthday = self::dateDiff03($birthday);
         $data = explode('-',$birthday);
 
-
-
         if(intval($data[1]) < 3){
-            return 'ผู้ป่วยอายุเกินแผนการรักษา';//"อายุน้อยกว่าเกณฑ์กำหนด 3 เดือน";
+            return 'อายุน้อยกว่าแผนการรักษา';//"อายุน้อยกว่าเกณฑ์กำหนด 3 เดือน";
         }else if(intval($data[1]) > 5){
             return 'ผู้ป่วยอายุเกินแผนการรักษา';//"อายุฃมากกว่าเกณฑ์กำหนด 5 เดือน";
         }
 
-        return str_replace("-","", $birthday);
+        $text = null;
+        if(intval($data[0]) > 0) $text .= "{$data[0]} ปี -";
+        if(intval($data[1]) > 0) $text .= "{$data[1]} เดือน -";
+        if(intval($data[2]) > 0) $text .= "{$data[2]} วัน -";
+
+        return str_replace("-","", $text);
     }
 
     static private function dateDiff03($birthday)
@@ -22,17 +24,8 @@ class checkBirthdayApi {
         $datetime1 = new DateTime($birthday);
         $datetime2 = new DateTime(date('Y-m-d'));
         $interval = $datetime1->diff($datetime2);
-        $convert = $interval->format('%y - %m - %d');
-        
-        $data = explode('-', $convert);
-        
-        $text = null;
-        
-        if(intval($data[0]) > 0) $text .= "{$data[0]} ปี -";
-        if(intval($data[1]) > 0) $text .= "{$data[1]} เดือน -";
-        if(intval($data[2]) > 0) $text .= "{$data[2]} วัน -";
-        
-        return strval($text);
+        $convert = $interval->format('%y - %m - %d');        
+        return strval($convert);
     }
 }
 

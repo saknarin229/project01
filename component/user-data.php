@@ -1,6 +1,10 @@
 <?php
+$status = true;
+if (isset($_POST['btnSave'])) $status = userDataClass::action();
 
-if (isset($_POST['btnSave'])) userDataClass::action();
+if($status !== true){
+    echo "<script>alert(`$status`)</script>";
+}
 
 $diagnose_id_code = null;
 $diagnose_idCrad = null;
@@ -179,11 +183,12 @@ if (isset($_GET['eid'])) {
         form.append('birthday', e.value);
         axios({
             method: 'post',
-            url: 'api/checkBirthday.api.php',
+            url: 'api/checkBirthday2.api.php',
             data: form
         }).then((data)=>{
+            alert(data.data);
             if(data.data === "ผู้ป่วยอายุเกินแผนการรักษา"){
-                alert(data.data);
+                
                 document.querySelector('[name=diagnose_birthday]').value = "";
             }else{
                 document.querySelector('[name="diagnose_age"]').value = data.data;
