@@ -42,7 +42,7 @@ $resData = queueAllClass::getQueueAll($_GET['id']);
                         </small>
                     </td>
                     <td>
-                        <a href="?op=user-queue-show&uid=<?php echo $item['diagnose_id_code'] ?>&dc=<?php echo $item['appointment_date'] ?>&hc=<?php echo $item['hospita_code'] ?>" class="btn btn-sm btn-warning position-relative">
+                        <a href="?op=user-queue-show&uid=<?php echo $item['diagnose_idCrad'] ?>&dc=<?php echo $item['appointment_date'] ?>&hc=<?php echo $item['hospita_code'] ?>" class="btn btn-sm btn-warning position-relative">
                             ข้อมูลเพิ่มเติม
                         </a>
                     </td>
