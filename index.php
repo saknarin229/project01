@@ -15,8 +15,6 @@ include_once('actionclass/user-data.class.php');
 include_once('actionclass/user-queue.class.php');
 include_once('actionclass/queue-all.class.php');
 
-echo "MyProject";
-
 include_once('layout/layout.php');
 
 // https://stackoverflow.com/questions/2870295/increment-date-by-one-month
