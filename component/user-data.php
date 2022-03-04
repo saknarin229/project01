@@ -123,7 +123,7 @@ if (isset($_GET['eid'])) {
 
             <div class="mb-3">
                 <label class="form-label">วันที่เข้ารับการรักษาครั้งแรก</label>
-                <input type="date" class="form-control form-control-sm" required name="diagnose_Date_first_admission" style="max-width: 25rem;" value="<?php $date = date_create($diagnose_Date_first_admission); echo str_replace(' ', 'T', date_format($date, "Y-m-d H:i:s")); ?>">
+                <input type="date" class="form-control form-control-sm" required name="diagnose_Date_first_admission" style="max-width: 25rem;" value="<?php $date = date_create($diagnose_Date_first_admission); echo str_replace(' ', 'T', date_format($date, "Y-m-d")); ?>">
             </div>
 
             <div class="mb-3">
@@ -195,7 +195,6 @@ if (isset($_GET['eid'])) {
                 document.getElementById('alertDanger').innerText = "";
                 document.querySelector('[name="diagnose_age"]').value = data.data;
             }
-
         });
     }
 
