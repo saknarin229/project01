@@ -186,13 +186,12 @@ if (isset($_GET['eid'])) {
             url: 'api/checkBirthday2.api.php',
             data: form
         }).then((data)=>{
-            alert(data.data);
-            if(data.data === "ผู้ป่วยอายุเกินแผนการรักษา"){
-                
-                document.querySelector('[name=diagnose_birthday]').value = "";
-            }else{
-                document.querySelector('[name="diagnose_age"]').value = data.data;
-            }
+            // alert(data.data);
+            // if(data.data === "ผู้ป่วยอายุเกินแผนการรักษา"){
+            //     document.querySelector('[name=diagnose_birthday]').value = "";
+            // }else{
+            //     document.querySelector('[name="diagnose_age"]').value = data.data;
+            // }
         });
     }
 
