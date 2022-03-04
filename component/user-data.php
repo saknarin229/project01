@@ -187,8 +187,10 @@ if (isset($_GET['eid'])) {
             data: form
         }).then((data)=>{
 
-            if(data.data === 'อายุน้อยกว่าแผนการรักษา' || data.data === 'ผู้ป่วยอายุเกินแผนการรักษา'){
-                document.getElementById('alertDanger').innerText = data.data;
+            if(data.data.indexOf('อายุน้อยกว่าแผนการรักษา') > 0 || data.data.indexOf('ผู้ป่วยอายุเกินแผนการรักษา') > 0){
+                let myData = data.data.split("||");
+                document.getElementById('alertDanger').innerText = myData[0].replace('_', '');
+                document.querySelector('[name="diagnose_age"]').value = myData[1];
             }else{
                 document.getElementById('alertDanger').innerText = "";
                 document.querySelector('[name="diagnose_age"]').value = data.data;

@@ -7,12 +7,28 @@ class checkBirthdayApi {
 
         if(intval($data[0]) === 0){
             if(intval($data[1]) < 3 ){
-                return 'อายุน้อยกว่าแผนการรักษา';
+
+                $text = null;
+                if(intval($data[0]) > 0) $text .= "{$data[0]} ปี -";
+                if(intval($data[1]) > 0) $text .= "{$data[1]} เดือน -";
+                if(intval($data[2]) > 0) $text .= "{$data[2]} วัน -";                
+
+                return '_อายุน้อยกว่าแผนการรักษา||'. str_replace("-","", $text);
             }else if(intval($data[1]) > 5){
-                return 'ผู้ป่วยอายุเกินแผนการรักษา'; 
+
+                $text = null;
+                if(intval($data[0]) > 0) $text .= "{$data[0]} ปี -";
+                if(intval($data[1]) > 0) $text .= "{$data[1]} เดือน -";
+                if(intval($data[2]) > 0) $text .= "{$data[2]} วัน -";                   
+                return '_ผู้ป่วยอายุเกินแผนการรักษา||'. str_replace("-","", $text); 
             }
         }else if(intval($data[0]) > 0){
-            return 'ผู้ป่วยอายุเกินแผนการรักษา';
+
+            $text = null;
+            if(intval($data[0]) > 0) $text .= "{$data[0]} ปี -";
+            if(intval($data[1]) > 0) $text .= "{$data[1]} เดือน -";
+            if(intval($data[2]) > 0) $text .= "{$data[2]} วัน -";               
+            return '_ผู้ป่วยอายุเกินแผนการรักษา||' . str_replace("-","", $text);
         }
 
 
