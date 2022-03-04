@@ -5,11 +5,16 @@ class checkBirthdayApi {
         $birthday = self::dateDiff03($birthday);
         $data = explode('-',$birthday);
 
-        if(intval($data[1]) < 3  && intval($data[0]) > 0){ //ถ้าอายุน้อยกว่า 3 เดือน และ ปีมากกว่า 1 ปี  //"อายุน้อยกว่าเกณฑ์กำหนด 3 เดือน";
-            return 'อายุน้อยกว่าแผนการรักษา';
-        }else if(intval($data[1]) > 5  && intval($data[0]) > 0){ //ถ้าอายุน้อยกว่า 5 เดือน และ ปีมากกว่า 1 ปี //"อายุฃมากกว่าเกณฑ์กำหนด 5 เดือน";
-            return 'ผู้ป่วยอายุเกินแผนการรักษา'; 
+        if(intval($data[0]) === 0){
+            if(intval($data[1]) < 3 ){
+                return 'อายุน้อยกว่าแผนการรักษา';
+            }else if(intval($data[1]) > 5){
+                return 'ผู้ป่วยอายุเกินแผนการรักษา'; 
+            }
+        }else if(intval($data[0]) > 0){
+            return 'ผู้ป่วยอายุเกินแผนการรักษา';
         }
+
 
         $text = null;
         if(intval($data[0]) > 0) $text .= "{$data[0]} ปี -";

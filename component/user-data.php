@@ -94,7 +94,7 @@ if (isset($_GET['eid'])) {
             </div>
 
             <div class="mb-3">
-                <label class="form-label">อายุ</label>
+                <label class="form-label">อายุ</label> <strong id="alertDanger" class="text-danger"></strong>
                 <input type="text" class="form-control form-control-sm" required name="diagnose_age" placeholder="อายุ" value="<?php echo $diagnose_age ?>">
 
             </div>
@@ -186,12 +186,14 @@ if (isset($_GET['eid'])) {
             url: 'api/checkBirthday2.api.php',
             data: form
         }).then((data)=>{
-            // alert(data.data);
-            // if(data.data === "ผู้ป่วยอายุเกินแผนการรักษา"){
-            //     document.querySelector('[name=diagnose_birthday]').value = "";
-            // }else{
-            //     document.querySelector('[name="diagnose_age"]').value = data.data;
-            // }
+
+            if(data.data === 'อายุน้อยกว่าแผนการรักษา' || data.data === 'ผู้ป่วยอายุเกินแผนการรักษา'){
+                document.getElementById('alertDanger').innerText = data.data;
+            }else{
+                document.getElementById('alertDanger').innerText = "";
+                document.querySelector('[name="diagnose_age"]').value = data.data;
+            }
+
         });
     }
 
