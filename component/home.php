@@ -161,10 +161,10 @@ if (isset($_GET['id'])) {
                 <form action="" class="border p-3 shadow-sm" method="post">
 
                     <strong class="text-danger">
-                        วันส่งตัวรักษาต้องไม่เกิน 5 เดือน นับจากวันเกิด
+                        วันส่งตัวรักษาต้องไม่เกิน 3-5 เดือน นับจากวันเกิด
                     </strong> <br>
                     <span class="text-danger">
-                        <?php echo optionclass::DateThai($diagnose_birthday) ?> ถึง <?php echo optionclass::MonthPlus($diagnose_birthday, 5) ?>
+                    <?php echo optionclass::MonthPlus($diagnose_birthday, 3) ?> ถึง <?php echo optionclass::MonthPlus($diagnose_birthday, 5) ?>
                     </span>
                     <hr>                   
 
